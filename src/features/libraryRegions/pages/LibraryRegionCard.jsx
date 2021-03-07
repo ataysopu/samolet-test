@@ -20,10 +20,10 @@ export const LibraryRegionCard = () => {
             <div><span>Количество библиотек:</span>{' '}<span>{libraryRegion?.libraries}</span></div>
             <div><span>Региональное ведомство:</span>{' '}<span>{libraryRegion?.fullname}</span></div>
             <div><span>Адрес ведомства:</span>{' '}<span>{libraryRegion?.address}</span></div>
-            <div><span>Количество сотрудников:</span>{' '}<span>{libraryRegion?.employees}</span></div>
-            <div><span>Количество пользователей:</span>{' '}<span>{libraryRegion?.users}</span></div>
-            <div><span>Количество подписчиков:</span>{' '}<span>{libraryRegion?.subscribers}</span></div>
-            <div><span>Количество компьютеров:</span>{' '}<span>{libraryRegion?.computers}</span></div>
+            <div><span>Количество сотрудников:</span>{' '}<span>{libraryRegion?.employees} тысяч человек</span></div>
+            <div><span>Количество пользователей:</span>{' '}<span>{libraryRegion?.users} тысяч человек</span></div>
+            <div><span>Количество подписчиков:</span>{' '}<span>{libraryRegion?.subscribers} тысяч человек</span></div>
+            <div><span>Количество компьютеров:</span>{' '}<span>{libraryRegion?.computers} штук</span></div>
             <div><span>Бюджет:</span>{' '}<span>{libraryRegion?.funds_budget}</span></div>
         </>
     )
