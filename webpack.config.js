@@ -8,7 +8,7 @@ module.exports = {
     entry: ['@babel/polyfill', './src/index.js'],
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: "[name].js"
+        filename: "[name].js",
     },
     devServer: {
         proxy: {
@@ -17,7 +17,8 @@ module.exports = {
                 changeOrigin: true,
                 secure: false,
             },
-        }
+        },
+        historyApiFallback: true,
     },
     plugins: [htmlPlugin],
     module: {

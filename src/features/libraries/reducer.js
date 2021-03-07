@@ -1,8 +1,8 @@
 import {createSymbiote} from 'redux-symbiote'
 
-const namespace = 'libraries'
+const namespace = 'libraryRegions'
 
-function sortAsc(arr, field) {
+const sortAsc = (arr, field) => {
     return arr.sort(function (a, b) {
         if (a[field] > b[field]) return 1;
 
@@ -12,7 +12,7 @@ function sortAsc(arr, field) {
     })
 }
 
-function sortDesc(arr, field) {
+const sortDesc = (arr, field) => {
     return arr.sort(function (a, b) {
         if (a[field] > b[field]) return -1;
 
@@ -24,7 +24,6 @@ function sortDesc(arr, field) {
 
 const initialState = {
     list: [],
-    readLibrary: {},
     isLoading: false,
     error: '',
     searchText: ''
@@ -47,7 +46,7 @@ const commonFail = (state, payload) => {
 }
 
 const symbiotes = {
-    getLibrariesList: {
+    getLibraryRegionsList: {
         request: commonRequest,
         finish: (state, payload) => {
             return {
@@ -88,13 +87,14 @@ const symbiotes = {
     read: {
         request: (state, payload) => {
             const {regionId} = payload;
-            const regionLibraries = state.list.find(region => region.order === Number(regionId));
+            const libraryRegion = state.list.find(region => region.order === Number(regionId));
             return {
                 ...state,
-                regionLibraries
+                list: [...state.list],
+                libraryRegion
             }
         }
     },
 }
 
-export const {actions: librariesInRegions, reducer: librariesStore} = createSymbiote(initialState, symbiotes, namespace)
+export const {actions: libraryRegions, reducer: libraryRegionsStore} = createSymbiote(initialState, symbiotes, namespace)

@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {librariesInRegions} from "../reducer";
+import {libraryRegions} from "../reducer";
 
-export const LibraryRow = (props) => {
+export const LibraryRegionRow = (props) => {
     const dispatch = useDispatch()
     let history = useHistory();
 

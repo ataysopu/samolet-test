@@ -1,13 +1,13 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {librariesInRegions} from "../reducer";
+import {libraryRegions} from "../reducer";
 
-export const SearchBar = () => {
+export const LibraryRegionsSortingSearchBar = () => {
     const dispatch = useDispatch()
-    const searchText = useSelector(state => state.librariesStore.searchText)
+    const searchText = useSelector(state => state.libraryRegionsStore.searchText)
 
     const filterProducts = (e) => {
-        dispatch(librariesInRegions.filter.request({
+        dispatch(libraryRegions.filter.request({
             searchText: e.target.value
         }))
     }
@@ -15,7 +15,7 @@ export const SearchBar = () => {
     const sortByInput = (e) => {
         const value = e.target.value;
         const direction = value.endsWith('asc') ? "asc" : "desc";
-        dispatch(librariesInRegions.sort.request({
+        dispatch(libraryRegions.sort.request({
             direction
         }))
     }
@@ -36,7 +36,7 @@ export const SearchBar = () => {
                 <option value='libraries_number_asc'>Количеству библиотек - от меньшего к большему</option>
                 <option value='libraries_number_desc'>Количеству библиотек - от большего к меньшему</option>
             </select>
-            <button onClick={() => dispatch(librariesInRegions.sort.discard())}>
+            <button onClick={() => dispatch(libraryRegions.sort.discard())}>
                 Сбросить фильтр и сортировку
             </button>
         </form>

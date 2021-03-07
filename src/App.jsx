@@ -1,17 +1,17 @@
 import React from 'react';
 import {Switch, Route} from "react-router-dom";
-import {FilterableLibrariesPage} from "./features/libraries/pages/FilterableLibrariesPage.jsx";
-import {LibraryPage} from "./features/libraries/pages/LibraryPage.jsx";
+import {LibraryRegionsList} from "./features/libraries/pages/LibraryRegionsList.jsx";
+import {LibraryRegionCard} from "./features/libraries/pages/LibraryRegionCard.jsx";
 
 export const App = () => {
     return (
         <>
             <Switch>
                 <Route exact path={'/'}>
-                    <FilterableLibrariesPage/>
+                    <LibraryRegionsList/>
                 </Route>
-                <Route path={'/:regionId'}>
-                    <LibraryPage/>
+                <Route path={'/:regionId'} exact>
+                    <LibraryRegionCard/>
                 </Route>
             </Switch>
         </>

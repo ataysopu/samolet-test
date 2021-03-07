@@ -1,8 +1,8 @@
 import {all} from "@redux-saga/core/effects";
-import {librariesInRegions} from "../features/libraries/sagas/librariesInRegions";
+import {libraryRegionsSaga} from "../features/libraries/sagas/libraryRegionsSaga";
 
 export default function* rootSaga() {
     yield all([
-        librariesInRegions()
+        libraryRegionsSaga()
     ])
 }

@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import {librariesStore} from '../features/libraries/reducer';
+import {libraryRegionsStore} from '../features/libraries/reducer';
 
 const reducer = combineReducers({
-    librariesStore: librariesStore
+    libraryRegionsStore
 });
 
 export default reducer;
