@@ -10,6 +10,7 @@ export const App = () => {
                 <Route exact path={'/'}>
                     <LibraryRegionsList/>
                 </Route>
+
                 <Route path={'/:regionId'} exact>
                     <LibraryRegionCard/>
                 </Route>

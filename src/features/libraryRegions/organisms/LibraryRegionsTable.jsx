@@ -1,52 +1,56 @@
 import React from 'react';
 import {LibraryRegionRow} from "../molecules/LibraryRegionRow.jsx";
 import {useDispatch, useSelector} from "react-redux";
-import {libraryRegions} from "../reducer";
+import {libraryRegionsActions} from "../reducer";
+import styled from "styled-components";
+import {getFilteredItems} from "../selectors";
 
 export const LibraryRegionsTable = () => {
     const dispatch = useDispatch()
-    const getSearchText = state => state.libraryRegionsStore.searchText;
-    const getItems = state => state.libraryRegionsStore.list;
 
-    const getFilteredItems = state => {
-        const searchText = getSearchText(state);
-        const items = getItems(state);
-
-        return items.filter((library) => {
-            return library.territory.toLowerCase().includes(searchText.toLowerCase())
-        })
-    }
-
-    const libraries = useSelector(getFilteredItems)
+    const libraryRegionsList = useSelector(getFilteredItems)
 
     React.useEffect(() => {
-        dispatch(libraryRegions.getLibraryRegionsList.request())
+        dispatch(libraryRegionsActions.getRegionsList.request())
     }, [])
 
-    let rows = libraries.map((library, index) => {
+    let rows = libraryRegionsList.map((region, index) => {
         return <LibraryRegionRow
-            key={library.order}
-            name={library.territory}
-            librariesNumber={library.libraries}
-            id={library.order}
+            key={region.order}
+            name={region.territory}
+            librariesNumber={region.libraries}
+            id={region.order}
             listNumber={index + 1}
         />
     })
     return (
         <table>
             <thead>
-                <tr>
-                    <th style={{textAlign: 'left', width: '10%'}}>№</th>
+            <StyledTableRow>
+                <th>№</th>
 
-                    <th style={{textAlign: 'left'}}>Регион</th>
+                <th>Регион</th>
 
-                    <th style={{textAlign: 'left'}}>Количество<br/>библиотек</th>
-                </tr>
+                <th>Количество<br/>библиотек</th>
+            </StyledTableRow>
             </thead>
 
             <tbody>
-                {rows}
+            {rows.length ? rows : <tr>
+                <td></td>
+                <td>Данных нет</td>
+                <td></td>
+            </tr>}
             </tbody>
         </table>
     )
 }
+
+const StyledTableRow = styled.tr`
+    & > th {
+        text-align: left;
+        &:first-child {
+            width: 10%;
+        }
+    }
+`;

@@ -1,53 +1,25 @@
 import {createSymbiote} from 'redux-symbiote'
+import {sortAsc, sortDesc} from "../../utils";
 
 const namespace = 'libraryRegions'
-
-const sortAsc = (arr, field) => {
-    return arr.sort(function (a, b) {
-        if (a[field] > b[field]) return 1;
-
-        if (b[field]> a[field]) return -1;
-
-        return 0;
-    })
-}
-
-const sortDesc = (arr, field) => {
-    return arr.sort(function (a, b) {
-        if (a[field] > b[field]) return -1;
-
-        if (b[field]> a[field]) return 1;
-
-        return 0;
-    })
-}
 
 const initialState = {
     list: [],
     isLoading: false,
     error: '',
-    searchText: ''
-}
-
-const commonRequest = (state, payload) => {
-    return {
-        ...state,
-        payload,
-        isLoading: true
-    }
-}
-
-const commonFail = (state, payload) => {
-    return {
-        ...state,
-        error: payload.error,
-        isLoading: false
-    }
+    searchText: '',
+    libraryRegion: {}
 }
 
 const symbiotes = {
-    getLibraryRegionsList: {
-        request: commonRequest,
+    getRegionsList: {
+        request: (state, payload) => {
+            return {
+                ...state,
+                payload,
+                isLoading: true
+            }
+        },
         finish: (state, payload) => {
             return {
                 ...state,
@@ -56,10 +28,27 @@ const symbiotes = {
                 isLoading: false
             }
         },
-        fail: commonFail
+        fail: (state, payload) => {
+            return {
+                ...state,
+                error: payload.error,
+                isLoading: false
+            }
+        }
+    },
+    readRegion: {
+        read: (state, payload) => {
+            const {regionId} = payload;
+            const libraryRegion = state.list.find(region => region.order === Number(regionId));
+            return {
+                ...state,
+                list: [...state.list],
+                libraryRegion
+            }
+        }
     },
     filter: {
-        request: (state, payload) => {
+        search: (state, payload) => {
             const {searchText} = payload;
             return {
                 ...state,
@@ -68,7 +57,7 @@ const symbiotes = {
         }
     },
     sort: {
-        request: (state, payload) => {
+        doSort: (state, payload) => {
             const {direction} = payload;
             const sortedRegions = direction === "asc" ?
                 sortAsc(state.list, 'libraries') :
@@ -84,17 +73,6 @@ const symbiotes = {
             }
         }
     },
-    read: {
-        request: (state, payload) => {
-            const {regionId} = payload;
-            const libraryRegion = state.list.find(region => region.order === Number(regionId));
-            return {
-                ...state,
-                list: [...state.list],
-                libraryRegion
-            }
-        }
-    },
 }
 
-export const {actions: libraryRegions, reducer: libraryRegionsStore} = createSymbiote(initialState, symbiotes, namespace)
+export const {actions: libraryRegionsActions, reducer: libraryRegionsStore} = createSymbiote(initialState, symbiotes, namespace)

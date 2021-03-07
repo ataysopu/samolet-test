@@ -1,10 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useHistory} from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {libraryRegions} from "../reducer";
+import styled from "styled-components";
 
 export const LibraryRegionRow = (props) => {
-    const dispatch = useDispatch()
     let history = useHistory();
 
     let goToLibraryPage = () => {
@@ -12,7 +10,7 @@ export const LibraryRegionRow = (props) => {
     }
 
     return (
-        <tr style={{cursor: 'pointer'}}>
+        <StyledTableRow title={'Посмотреть данные региона'}>
             <td>
                 {props.listNumber}
             </td>
@@ -22,6 +20,10 @@ export const LibraryRegionRow = (props) => {
             <td>
                 {`${props.librariesNumber} шт.`}
             </td>
-        </tr>
+        </StyledTableRow>
     )
 }
+
+const StyledTableRow = styled.tr`
+    cursor: pointer;
+`;

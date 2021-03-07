@@ -1,4 +1,4 @@
-import {libraryRegions} from "../reducer";
+import {libraryRegionsActions} from "../reducer";
 import {call, put, takeEvery} from "@redux-saga/core/effects";
 import axios from "../../../utils/axios-config";
 
@@ -8,15 +8,15 @@ function* libraryRegionsListRequestSaga({payload = {}}) {
     try {
         const res = yield call(fetchLibraryRegions);
         if (res.data.error) {
-            yield put(libraryRegions.getLibraryRegionsList.fail(res.data.error))
+            yield put(libraryRegionsActions.getRegionsList.fail(res.data.error))
         } else {
-            yield put(libraryRegions.getLibraryRegionsList.finish({data: res.data}))
+            yield put(libraryRegionsActions.getRegionsList.finish({data: res.data}))
         }
     } catch (error) {
-        yield put(libraryRegions.getLibraryRegionsList.fail(error))
+        yield put(libraryRegionsActions.getRegionsList.fail(error))
     }
 }
 
 export const libraryRegionsSaga = function* () {
-    yield takeEvery([libraryRegions.getLibraryRegionsList.request().type], libraryRegionsListRequestSaga)
+    yield takeEvery([libraryRegionsActions.getRegionsList.request().type], libraryRegionsListRequestSaga)
 }

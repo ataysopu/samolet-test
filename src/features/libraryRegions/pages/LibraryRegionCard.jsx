@@ -1,16 +1,17 @@
 import React, {useEffect} from 'react';
 import {Link, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {libraryRegions} from "../reducer";
+import {libraryRegionsActions} from "../reducer";
+import {getLibraryRegion} from "../selectors";
 
 export const LibraryRegionCard = () => {
     const dispatch = useDispatch()
     const {regionId} = useParams();
 
-    const libraryRegion = useSelector(state => state.libraryRegionsStore.libraryRegion)
+    const libraryRegion = useSelector(getLibraryRegion)
 
     useEffect(() => {
-        dispatch(libraryRegions.read.request({regionId}))
+        dispatch(libraryRegionsActions.readRegion.read({regionId}))
     }, [])
 
     return (
@@ -24,7 +25,7 @@ export const LibraryRegionCard = () => {
             <div><span>Количество пользователей:</span>{' '}<span>{libraryRegion?.users} тысяч человек</span></div>
             <div><span>Количество подписчиков:</span>{' '}<span>{libraryRegion?.subscribers} тысяч человек</span></div>
             <div><span>Количество компьютеров:</span>{' '}<span>{libraryRegion?.computers} штук</span></div>
-            <div><span>Бюджет:</span>{' '}<span>{libraryRegion?.funds_budget}</span></div>
+            <div><span>Бюджет:</span>{' '}<span>{libraryRegion?.funds_budget} тысяч рублей</span></div>
         </>
     )
 }
