@@ -10,7 +10,7 @@ export const LibraryRegionRow = (props) => {
     }
 
     return (
-        <StyledTableRow title={'Посмотреть данные региона'}>
+        <StyledTableRow title={`Посмотреть данные региона ${props.name}`}>
             <td>
                 {props.listNumber}
             </td>
