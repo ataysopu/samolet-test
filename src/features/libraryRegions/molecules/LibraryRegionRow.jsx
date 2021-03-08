@@ -5,7 +5,7 @@ import styled from "styled-components";
 export const LibraryRegionRow = (props) => {
     let history = useHistory();
 
-    let goToLibraryPage = () => {
+    let goToLibraryRegionPage = () => {
         history.push(`/${props.id}`)
     }
 
@@ -14,7 +14,7 @@ export const LibraryRegionRow = (props) => {
             <td>
                 {props.listNumber}
             </td>
-            <td onClick={goToLibraryPage}>
+            <td onClick={goToLibraryRegionPage}>
                 {props.name}
             </td>
             <td>
