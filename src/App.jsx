@@ -11,7 +11,7 @@ export const App = () => {
                     <LibraryRegionsList/>
                 </Route>
 
-                <Route path={'/:regionId'} exact>
+                <Route path={'/:regionId'}>
                     <LibraryRegionCard/>
                 </Route>
             </Switch>
