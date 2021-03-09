@@ -8,7 +8,7 @@ export const LibraryRegionsSortingSearchBar = () => {
     const dispatch = useDispatch()
     const searchText = useSelector(getSearchText)
 
-    const filterProducts = (e) => {
+    const filterRegions = (e) => {
         dispatch(libraryRegionsActions.filter.search({
             searchText: e.target.value
         }))
