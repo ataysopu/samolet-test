@@ -31,7 +31,7 @@ export const LibraryRegionsSortingSearchBar = () => {
             <input
                 type="text"
                 placeholder="Поиск по региону"
-                onChange={filterProducts}
+                onChange={filterRegions}
                 value={searchText}
             />
 
